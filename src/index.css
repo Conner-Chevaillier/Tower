@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.App {
+  display: flex;
+ margin-width:400px ;
+
+}
+form {
+  display: flex;
+  margin: 50px;
+  border: blue solid;
+  background-color: beige;
+}
