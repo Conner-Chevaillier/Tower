@@ -24,18 +24,13 @@ class App extends Component {
          .then(res => res.json())
          .then(json => this.setState({ newquote: json }))
    }
-   GetFavorites = () => {
-      fetch(`https://favqs.com/api/qotd`)
-         .then(res => res.json())
-         .then(json => this.setState({ newquote: json }))
-   }
 
    render() {
       return (
-
          <div>
-            <h1>Quotes</h1>
-            <div>
+            <h1>Hello</h1>
+
+            <div >
                <section className='quote-box'>
                   <div className='quote-wrapper'>
                      <h1 className='quote'>{this.state.body}</h1>
@@ -43,10 +38,9 @@ class App extends Component {
                   </div>
                   <div className='btn-wrap'>
                      <button className='new-quote' onClick={this.fetchhNewQuote}>Get New Quote</button>
-                     <button className='new-quote' onClick={this.fetchhNewQuote}>Save Favorite Quote</button>
                   </div>
                </section>
-            </div>
+            </div >
          </div>
       )
    }

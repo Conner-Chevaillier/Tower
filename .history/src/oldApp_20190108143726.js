@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Router, Link } from "@reach/router";
-
+import Quote from "./Quote"
 class App extends Component {
   constructor() {
     super()

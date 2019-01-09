@@ -24,15 +24,9 @@ class App extends Component {
          .then(res => res.json())
          .then(json => this.setState({ newquote: json }))
    }
-   GetFavorites = () => {
-      fetch(`https://favqs.com/api/qotd`)
-         .then(res => res.json())
-         .then(json => this.setState({ newquote: json }))
-   }
 
    render() {
       return (
-
          <div>
             <h1>Quotes</h1>
             <div>
