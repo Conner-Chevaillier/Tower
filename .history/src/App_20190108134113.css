@@ -1,13 +1,6 @@
 .App {
   text-align: center;
 }
-.Form{
-  
-  background-color: antiquewhite;
-  justify-content: center;
-  border: #61dafb solid;
-
-}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

@@ -12,7 +12,8 @@ class App extends Component {
          email: '',
          id: '',
          body: '',
-         author: ''
+         author: '',
+         newquote: []
       }
    }
 
@@ -29,6 +30,17 @@ class App extends Component {
          .then(res => res.json())
          .then(json => this.setState({ newquote: json }))
    }
+   // handleQuoteLogin = async () => {
+   //    await fetch(`http://localhost:3001/quotes/`, {
+   //       headers: {
+   //          'Content-Type': 'application/json'
+   //       },
+   //       method: 'POST',
+   //       body: email()
+   //    })
+   //       .then((response) => response.json())
+   //       .then((response) => this.setState({ email }))
+   // }
 
    handleQuoteLogin = async () => {
       console.log("favs")

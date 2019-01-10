@@ -9,37 +9,40 @@ class App extends Component {
    constructor() {
       super()
       this.state = {
-         email: '',
          id: '',
          body: '',
-         author: ''
+         author: '',
+         newquote: []
       }
    }
 
    componentDidMount() {
-      this.fetchNewQuote()
-   }
-   fetchNewQuote = () => {
       fetch(`https://favqs.com/api/qotd`)
          .then(res => res.json())
          .then(json => this.setState({ body: json.quote.body, author: json.quote.author, id: json.quote.id }))
+   }
+   fetchhNewQuote = () => {
+      fetch(`https://favqs.com/api/qotd`)
+         .then(res => res.json())
+         .then(json => this.setState({ newquote: json }))
    }
    GetFavorites = () => {
       fetch(`https://favqs.com/api/qotd`)
          .then(res => res.json())
          .then(json => this.setState({ newquote: json }))
    }
-
    handleQuoteLogin = async () => {
-      console.log("favs")
-      await fetch(`http://localhost:3001/quotes/${this.state.email}`)
+      await fetch(`http://localhost:3001/quotes`, {
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         method: 'POST',
+         body: JSON.stringify(newBody)
+      })
          .then((response) => response.json())
+         .then((response) => console.log(response))
+   }
 
-         .then((response) => this.setState({ body: response.quote, author: response.author }))
-   }
-   onEmailChange = (e) => {
-      this.setState({ email: e.target.value })
-   }
 
    render() {
       return (
@@ -47,7 +50,7 @@ class App extends Component {
             <h1>Quotes</h1>
             <div>
                <div>
-                  <input type="string" placeholder="enter email" onChange={this.onEmailChange}></input>
+                  <input type="string" placeholder="enter email"></input>
                   <button onClick={this.handleQuoteLogin} type='button'>login</button>
                </div>
                <section className='quote-box'>
@@ -56,7 +59,7 @@ class App extends Component {
                      <div className='author'>{this.state.author}</div>
                   </div>
                   <div className='btn-wrap'>
-                     <button type='button' className='new-quote' onClick={this.fetchNewQuote}>Get New Quote</button>
+                     <button className='new-quote' onClick={this.fetchhNewQuote}>Get New Quote</button>
                   </div>
                </section>
             </div>

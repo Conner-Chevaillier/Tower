@@ -1,8 +1,8 @@
 .App {
   text-align: center;
 }
-.Form{
-  
+.form{
+  display : flex;
   background-color: antiquewhite;
   justify-content: center;
   border: #61dafb solid;

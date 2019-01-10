@@ -1,9 +1,8 @@
 .App {
   text-align: center;
 }
-.Form{
-  
-  background-color: antiquewhite;
+.Wrapper{
+  display : flex;
   justify-content: center;
   border: #61dafb solid;
 

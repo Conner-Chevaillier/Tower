@@ -2,7 +2,7 @@
   text-align: center;
 }
 .Form{
-  
+  display : flex;
   background-color: antiquewhite;
   justify-content: center;
   border: #61dafb solid;
