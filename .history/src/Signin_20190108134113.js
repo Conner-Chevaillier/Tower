@@ -19,5 +19,3 @@ class Signin extends Component {
    }
 }
 export default Signin
-{/* <<deletePostQuote todos={this.state.deletePostQuote} deletePostQuote={this.deletePostQuote} />> */ } \
-{/* <div onClick={this.deletePostQuote.bind(this)}></div> */ }

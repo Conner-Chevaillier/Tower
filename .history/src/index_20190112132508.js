@@ -6,15 +6,15 @@ import './App.css'
 // import Quote from './Quote'
 import * as serviceWorker from './serviceWorker'
 
-// const quoteAPI = "https://memetower.herokuapp.com"
-const quoteAPI = 'http://localhost:3001'
+const quoteAPI = "https://memetower.herokuapp.com/"
+const quoteAPIt = 'http://localhost:3001/'
 
 class App extends Component {
    constructor() {
       super()
       this.state = {
          email: '',
-         quoteId: '',
+         id: '',
          body: '',
          author: '',
          listOfSavedQuote: [],
@@ -27,24 +27,15 @@ class App extends Component {
       this.fetchNewQuote()
    }
 
-   deleteQuote = (event) => {
-      event.preventDefault()
-      let id = event.target.getAttribute('data-quoteid')
-      fetch(`${quoteAPI}/quotes/${this.state.email}/${id}`, { method: 'DELETE' })
-         .then(res => res)
-         .then(res => this.handleQuoteLogin())
-   }
-
-
    addNewQuote = () => {
-      fetch(`${quoteAPI}/quotes`)
+      fetch(`http://localhost:3001/quotes`)
          .then(res => res.json())
-         .then(json => this.setState(prevState => ({ body: json.quote.body, author: json.quote.author, quoteId: json.quote.id, listOfSavedQuote: [...prevState.listOfSavedQuote, { quote: json.quote.body, author: json.quote.author }] })))
+         .then(json => this.setState({ body: json.quote.body, author: json.quote.author, id: json.quote.id }))
    }
    fetchNewQuote = () => {
       fetch(`https://favqs.com/api/qotd`)
          .then(res => res.json())
-         .then(json => this.setState({ body: json.quote.body, author: json.quote.author, quoteId: json.quote.id }))
+         .then(json => this.setState({ body: json.quote.body, author: json.quote.author, id: json.quote.id }))
    }
    // GetFavorites = () => {
    //    fetch(`https://favqs.com/api/qotd`)
@@ -56,12 +47,7 @@ class App extends Component {
       console.log("favs")
       fetch(`http://localhost:3001/quotes/${this.state.email}`)
          .then((response) => response.json())
-         .then((response) => {
-            console.log('fave response', response.quoteArray)
-            this.setState({ listOfSavedQuote: response.quoteArray })
-         }
-
-         )
+         .then((response) => this.setState({ body: response.quote, author: response.author }))
       console.log("favs")
    }
    onEmailChange = (e) => {
@@ -69,12 +55,10 @@ class App extends Component {
    }
    postSaveQuote = () => {
       let post = {
-         userid: this.state.email,
-         quote: this.state.body,
+         quote: this.state.quote,
          author: this.state.author,
-         quoteId: this.state.quoteId,
       }
-      fetch(`${quoteAPI}/faves`, {
+      fetch(quoteAPI, {
          method: "POST",
          body: JSON.stringify(post),
          headers: {
@@ -82,24 +66,11 @@ class App extends Component {
          }
       })
          .then(saveQuote => saveQuote.json())
-         .then(quote => this.setState(prevState => ({ listOfSavedQuote: [...prevState.listOfSavedQuote, { quote: this.state.body, author: this.state.author }] })))
-      // .then(alert('You added a Quote!'))
-   }
-   renderFavorites = () => {
-      return this.state.listOfSavedQuote.map(quote => {
-         console.log('fave quote', quote)
-         return (
-            <div key={quote.quoteId} className='quote-wrapper'>
-               <h1 className='quote'>{quote.quote}</h1>
-               <div className='author'>{quote.author}</div>
-               <button data-quoteid={quote.quoteId} onClick={this.deleteQuote} >remove favorite</button>
-            </div>
-         )
-      })
+         .then(this.loadQuote)
+         .then(alert('You added a Quote!'))
    }
    // deletePostQuote = (e) => {
    //    var deletePostQuote = this.state.messages;
-
 
 
    render() {
@@ -116,7 +87,6 @@ class App extends Component {
                      <h1 className='quote'>{this.state.body}</h1>
                      <div className='author'>{this.state.author}</div>
                   </div>
-
                   <Router>
                      <div>
                         <Route path="/delete" render={() => (<deleteQuote deleteQuote={this.deleteQuote} handleInput={this.handleInput} />)} />
@@ -129,9 +99,6 @@ class App extends Component {
                   </div>
                   <div>
                   </div>
-                  <hr />
-                  <h1>Favorite Quotes</h1>
-                  {this.renderFavorites()}
                </section>
             </div>
          </form>

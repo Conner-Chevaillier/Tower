@@ -92,7 +92,7 @@ class App extends Component {
             <div key={quote.quoteId} className='quote-wrapper'>
                <h1 className='quote'>{quote.quote}</h1>
                <div className='author'>{quote.author}</div>
-               <button data-quoteid={quote.quoteId} onClick={this.deleteQuote} >remove favorite</button>
+               <button data-quoteId={quote.quoteId} onClick={this.deleteQuote} >remove favorite</button>
             </div>
          )
       })

@@ -28,16 +28,14 @@ class App extends Component {
    }
 
    deleteQuote = (event) => {
-      event.preventDefault()
-      let id = event.target.getAttribute('data-quoteid')
-      fetch(`${quoteAPI}/quotes/${this.state.email}/${id}`, { method: 'DELETE' })
-         .then(res => res)
-         .then(res => this.handleQuoteLogin())
+      fetch(`http://localhost:3001/quotes`)
+         .then(res => res.json())
+         .then(json => this)
    }
 
 
    addNewQuote = () => {
-      fetch(`${quoteAPI}/quotes`)
+      fetch(`http://localhost:3001/quotes`)
          .then(res => res.json())
          .then(json => this.setState(prevState => ({ body: json.quote.body, author: json.quote.author, quoteId: json.quote.id, listOfSavedQuote: [...prevState.listOfSavedQuote, { quote: json.quote.body, author: json.quote.author }] })))
    }
@@ -57,7 +55,7 @@ class App extends Component {
       fetch(`http://localhost:3001/quotes/${this.state.email}`)
          .then((response) => response.json())
          .then((response) => {
-            console.log('fave response', response.quoteArray)
+            console.log('fave response', response.quoteArray[0])
             this.setState({ listOfSavedQuote: response.quoteArray })
          }
 
@@ -89,10 +87,11 @@ class App extends Component {
       return this.state.listOfSavedQuote.map(quote => {
          console.log('fave quote', quote)
          return (
-            <div key={quote.quoteId} className='quote-wrapper'>
+            <div className='quote-wrapper'>
+
                <h1 className='quote'>{quote.quote}</h1>
                <div className='author'>{quote.author}</div>
-               <button data-quoteid={quote.quoteId} onClick={this.deleteQuote} >remove favorite</button>
+               <button onClick={this.deleteQuote} >remove favorite</button>
             </div>
          )
       })
