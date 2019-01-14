@@ -82,7 +82,7 @@ class App extends Component {
          }
       })
          .then(saveQuote => {
-
+            console.log(saveQuote.json())
             return saveQuote.json()
          }
          )

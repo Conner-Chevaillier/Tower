@@ -6,8 +6,8 @@ import './App.css'
 // import Quote from './Quote'
 import * as serviceWorker from './serviceWorker'
 
-const quoteAPI = "https://memetower.herokuapp.com"
-// const quoteAPI = 'http://localhost:3001'
+// const quoteAPI = "https://memetower.herokuapp.com"
+const quoteAPI = 'http://localhost:3001'
 
 class App extends Component {
    constructor() {
@@ -54,7 +54,7 @@ class App extends Component {
 
    handleQuoteLogin = () => {
       console.log("favs")
-      fetch(`https://memetower.herokuapp.com/quotes/${this.state.email}`)
+      fetch(`http://localhost:3001/quotes/${this.state.email}`)
          .then((response) => response.json())
          .then((response) => {
             console.log('fave response', response.quoteArray)
@@ -81,12 +81,7 @@ class App extends Component {
             "Content-Type": "application/json",
          }
       })
-         .then(saveQuote => {
-
-            return saveQuote.json()
-         }
-         )
-
+         .then(saveQuote => saveQuote.json())
          .then(quote => this.setState(prevState => ({ listOfSavedQuote: [...prevState.listOfSavedQuote, { quote: this.state.body, author: this.state.author }] })))
       // .then(alert('You added a Quote!'))
    }

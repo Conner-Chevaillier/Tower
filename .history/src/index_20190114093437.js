@@ -81,12 +81,7 @@ class App extends Component {
             "Content-Type": "application/json",
          }
       })
-         .then(saveQuote => {
-
-            return saveQuote.json()
-         }
-         )
-
+         .then(saveQuote => saveQuote.json())
          .then(quote => this.setState(prevState => ({ listOfSavedQuote: [...prevState.listOfSavedQuote, { quote: this.state.body, author: this.state.author }] })))
       // .then(alert('You added a Quote!'))
    }

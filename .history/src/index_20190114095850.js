@@ -54,7 +54,8 @@ class App extends Component {
 
    handleQuoteLogin = () => {
       console.log("favs")
-      fetch(`https://memetower.herokuapp.com/quotes/${this.state.email}`)
+      const proxy = 'https://cors-anywhere.herokuapp.com/';
+      fetch(proxy + `https://memetower.herokuapp.com/quotes/${this.state.email}`)
          .then((response) => response.json())
          .then((response) => {
             console.log('fave response', response.quoteArray)
@@ -82,7 +83,7 @@ class App extends Component {
          }
       })
          .then(saveQuote => {
-
+            console.log(saveQuote.json())
             return saveQuote.json()
          }
          )
